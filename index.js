@@ -2,17 +2,21 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-
 const Blog = require("./model/blog");
+const {configDotenv}  = require("dotenv")
+
 
 const userRouter = require("./routes/user");
 const blogRouter = require("./routes/blog");
 const { checkForAuthenticationCookie } = require("./middlewares/authentication");
 
 const app = express();
-const port = 8000;
+configDotenv();
+const port = process.env.PORT ?? 8000;
 
-mongoose.connect("mongodb://127.0.0.1:27017").then(e => { console.log("mongoDB Connected") });
+console.log(port, process.env.mongodb);
+
+mongoose.connect(process.env.mongodb).then(e => { console.log("mongoDB Connected") });
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
