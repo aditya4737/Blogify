@@ -12,7 +12,7 @@ const { checkForAuthenticationCookie } = require("./middlewares/authentication")
 
 const app = express();
 configDotenv();
-const port = process.env.PORT ?? 8000;
+const port = process.env.PORT;
 
 console.log(port, process.env.mongodb);
 
